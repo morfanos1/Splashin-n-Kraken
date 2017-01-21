@@ -85,6 +85,9 @@ public class CursorScript : MonoBehaviour {
             0.0f
         );
 
+        //Rotating screws up the controls
+        //gameObject.transform.Rotate(Vector3.forward * Time.deltaTime * -20);
+
     }
 
     void Fire()
