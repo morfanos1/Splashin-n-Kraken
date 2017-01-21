@@ -10,6 +10,8 @@ public class CursorScript : MonoBehaviour {
 
     public ControllerType controller;
 
+    public ManaManager mana;
+
     // Use this for initialization
     void Start ()
     {
@@ -87,8 +89,9 @@ public class CursorScript : MonoBehaviour {
 
     }
 
-    void Fire()
+   public void Fire()
     {
         Instantiate(wavePrefab, gameObject.transform.position, Quaternion.identity);
+        mana.SubMana(30.0f);
     }
 }
