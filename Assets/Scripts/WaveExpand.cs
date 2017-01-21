@@ -10,6 +10,8 @@ public class WaveExpand : MonoBehaviour {
     public float endRadius;
     public float expandSpeed;
 
+    public float magnitude;
+
     // Use this for initialization
     void Start()
     {
@@ -26,6 +28,8 @@ public class WaveExpand : MonoBehaviour {
     {
         for(float i = startRad; i < endRad; i = i + expandSpeed*Time.deltaTime)
         {
+            //float time = (endRadius - startRadius) / expandSpeed * Time.deltaTime;
+            //magnitude = Mathf.Lerp();
             ParticleSystem.ShapeModule shapeModule = ps.shape;
             shapeModule.radius = i;
             //ps.shape.radius = i;
