@@ -9,9 +9,8 @@ public class Rocks : MonoBehaviour {
 	public float OuterRadius;
 	// Distance between rocks.
 	public float RockSpacing;
-	// Object to spawn as rocks.
-	public GameObject Rock;
 
+	private List<GameObject> RockTemplates;
 	private float WorldToGrid;
 	private int GridCount;
 	private int[,] Grid;
@@ -19,18 +18,28 @@ public class Rocks : MonoBehaviour {
 	private const int MaxSamples = 10;
 
 	void Start() {
-		this.Rock.SetActive(false);
-		this.Generate();
+		Generate();
 	}
 
 	void Generate() {
+		if (this.RockTemplates == null) {
+			this.RockTemplates = new List<GameObject>();
+			foreach (Transform child in this.transform) {
+				GameObject obj = child.gameObject;
+				obj.SetActive(false);
+				this.RockTemplates.Add(child.gameObject);
+			}
+		}
+
 		foreach (Transform child in this.transform) {
-			Object.Destroy(child.gameObject);
+			GameObject obj = child.gameObject;
+			if (obj.activeSelf) {
+				Object.Destroy(obj);
+			}
 		}
 
 		this.WorldToGrid = Mathf.Sqrt(2) / this.RockSpacing;
 		this.GridCount = Mathf.CeilToInt(2.0f * this.OuterRadius * this.WorldToGrid);
-
 		this.Grid = new int[this.GridCount, this.GridCount];
 		this.RockLocations = new List<Vector2>();
 
@@ -40,7 +49,6 @@ public class Rocks : MonoBehaviour {
 		for (int i = 0; i < 10000 && queue.Count > 0; i++) {
 			this.TryAddRock(queue.Dequeue(), queue);
 		}
-
 	}
 
 	// Find the closest rock to the given point within the given radius.
@@ -88,7 +96,8 @@ public class Rocks : MonoBehaviour {
 		if (this.FindRock(pos, this.RockSpacing, out rockPos)) {
 			return;
 		}
-		GameObject rock = Object.Instantiate(this.Rock, new Vector3(pos.x, pos.y), Quaternion.identity, this.transform);
+		GameObject template = this.RockTemplates[Random.Range(0, this.RockTemplates.Count)];
+		GameObject rock = Object.Instantiate(template, new Vector3(pos.x, pos.y), Quaternion.identity, this.transform);
 		rock.SetActive(true);
 		this.RockLocations.Add(pos);
 		this.Grid[xi, yi] = this.RockLocations.Count;
