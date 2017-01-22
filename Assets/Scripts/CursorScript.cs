@@ -11,9 +11,7 @@ public class CursorScript : MonoBehaviour {
     public ControllerType controller;
 
     // Target ships caught in the Kraken Zone
-    public GameObject targetShip;
     public GameObject krakenZonePrefab;
-
 
     public ManaManager mana;
 
@@ -90,7 +88,8 @@ public class CursorScript : MonoBehaviour {
             Fire();
         }
 
-        if (Input.GetButtonDown(krakenStr)) {
+        if (Input.GetButtonDown(krakenStr))
+        {
             KrakenPull();
         }
 
@@ -121,10 +120,11 @@ public class CursorScript : MonoBehaviour {
     }
 
     public void KrakenPull() {
-        if (mana.value > 0) {
+        if (mana.value > 0)
+        {
             // Summon Kraken to attack all ships within a certain radius of the cursor
 
-            Instantiate(krakenZonePrefab, gameObject.transform.position, Quaternion.identity);
+            Destroy(Instantiate(krakenZonePrefab, gameObject.transform.position, Quaternion.identity), 1f);
             mana.SubMana(30.0f);
         }
     }
