@@ -12,6 +12,9 @@ public class CursorScript : MonoBehaviour {
 
     public ManaManager mana;
 
+    //Audio
+    public AudioSource a1;
+
 
     // Use this for initialization
     void Start ()
@@ -99,6 +102,7 @@ public class CursorScript : MonoBehaviour {
         {
             Instantiate(wavePrefab, gameObject.transform.position, Quaternion.identity);
             mana.SubMana(5.0f);
+            a1.PlayScheduled(2);
         }
     }
 }
