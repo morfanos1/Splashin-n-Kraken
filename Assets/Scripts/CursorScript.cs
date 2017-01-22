@@ -107,11 +107,13 @@ public class CursorScript : MonoBehaviour {
         //Rotating screws up the controls
         //gameObject.transform.Rotate(Vector3.forward * Time.deltaTime * -20);
 
+        mana.AddMana(1.0f*Time.deltaTime);
+
     }
 
    public void Fire()
     {
-        if(mana.value > 0)
+        if(mana.value > 5)
         {
             Instantiate(wavePrefab, gameObject.transform.position, Quaternion.identity);
             mana.SubMana(5.0f);
@@ -121,7 +123,7 @@ public class CursorScript : MonoBehaviour {
     }
 
     public void KrakenPull() {
-        if (mana.value > 0)
+        if (mana.value > 30)
         {
             // Summon Kraken to attack all ships within a certain radius of the cursor
 
@@ -129,4 +131,5 @@ public class CursorScript : MonoBehaviour {
             mana.SubMana(30.0f);
         }
     }
+
 }
