@@ -107,6 +107,8 @@ public class CursorScript : MonoBehaviour {
         //Rotating screws up the controls
         //gameObject.transform.Rotate(Vector3.forward * Time.deltaTime * -20);
 
+        mana.AddMana(1.0f*Time.deltaTime);
+
     }
 
    public void Fire()
@@ -129,4 +131,5 @@ public class CursorScript : MonoBehaviour {
             mana.SubMana(30.0f);
         }
     }
+
 }
