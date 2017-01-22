@@ -113,7 +113,7 @@ public class CursorScript : MonoBehaviour {
 
    public void Fire()
     {
-        if(mana.value > 0)
+        if(mana.value > 5)
         {
             Instantiate(wavePrefab, gameObject.transform.position, Quaternion.identity);
             mana.SubMana(5.0f);
@@ -123,7 +123,7 @@ public class CursorScript : MonoBehaviour {
     }
 
     public void KrakenPull() {
-        if (mana.value > 0)
+        if (mana.value > 30)
         {
             // Summon Kraken to attack all ships within a certain radius of the cursor
 

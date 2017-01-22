@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class IslandScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start ()
+    {
 		
 	}
 	
@@ -22,11 +23,16 @@ public class IslandScript : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.tag == "Ship")
+        if(collision.tag == "Ship")
         {
             Application.LoadLevel(3);
+        }
+
+        if (collision.tag == "Cursor")
+        {
+            collision.GetComponent<CursorScript>().mana.AddMana(25);
         }
     }
 }
