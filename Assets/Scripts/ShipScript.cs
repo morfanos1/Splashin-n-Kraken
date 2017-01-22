@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipScript : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public float maxVelocity;
 
     // Use this for initialization
     void Start()
@@ -15,7 +16,7 @@ public class ShipScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -28,14 +29,13 @@ public class ShipScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        float force = other.gameObject.GetComponent<WaveExpand>().magnitude;
-
         if (other.gameObject.tag == "Wave")
         {
+            float force = other.gameObject.GetComponent<WaveExpand>().magnitude;
             // Calculate Angle Between the collision point and the player
             Vector3 dir = transform.position - other.transform.position;
             dir = dir.normalized;
-            GetComponent<Rigidbody2D>().AddForce(dir * force);
+            rb.AddForce(dir * force);
         }
     }
 }
