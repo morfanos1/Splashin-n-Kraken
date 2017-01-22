@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 18b8f85b55e67304e999918a82ed2cdf
-timeCreated: 1485028684
+guid: 354c999b8522ea64e8295b5767cb37a9
+timeCreated: 1485096079
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: ShipCrash
   userData: 
   assetBundleName: 
   assetBundleVariant: 
