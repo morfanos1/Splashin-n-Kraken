@@ -28,7 +28,6 @@ public class ShipSpawner : MonoBehaviour {
 			return;
 		}
 		this.ShipTemplate = this.transform.GetChild(0).gameObject;
-		this.ShipTemplate.SetActive(false);
 		this.NextShipTime = Time.time;
 		this.NextShipAngle = Random.Range(-Mathf.PI, Mathf.PI);
 	}

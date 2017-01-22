@@ -13,8 +13,8 @@ public class ShipScript : MonoBehaviour
     public bool isBeingDestroyed;
 
     //Audio
-    public AudioSource crash1;
-    public AudioSource crash2;
+    public AudioClip crash1;
+    public AudioClip crash2;
 
     void Start()
     {
@@ -31,14 +31,11 @@ public class ShipScript : MonoBehaviour
         if(collision.collider.tag == "Obstacle" && isBeingDestroyed == false)
         {
             //Instantiate(shipWreck, gameObject.transform.position, Quaternion.identity);
-            isBeingDestroyed = true;
-            crash1.Play();
-            crash2.Play();
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = 0.0f;
+            
+			AudioSource.PlayClipAtPoint(crash1, this.transform.position);
+			AudioSource.PlayClipAtPoint(crash2, this.transform.position);
             anim.SetTrigger("Crashed");
-            //Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject, crash2.clip.length);
+			DestroyShip(crash2.length);
         }      
     }
 
@@ -55,10 +52,16 @@ public class ShipScript : MonoBehaviour
         // Adding a Sprite renderer to KrakenZone in order to display it clearly to players. Red circle that will become more transparent and fade over time or when the user lets goe of the held button
         if (other.gameObject.tag == "KrakenZone" && isBeingDestroyed == false) {
             // Calculate Angle Between the collision point and the player
-            isBeingDestroyed = true;
             anim.SetTrigger("KrakenAttack");
-            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length);
-
+			DestroyShip(anim.GetCurrentAnimatorStateInfo(0).length);
         }
     }
+
+	void DestroyShip(float time) {
+		Destroy(gameObject, time);
+		isBeingDestroyed = true;
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = 0.0f;
+		Destroy(this.GetComponent<ShipNavigator>());
+	}
 }
