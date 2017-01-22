@@ -7,6 +7,8 @@ public class ShipScript : MonoBehaviour
     public Rigidbody2D rb;
     public float maxVelocity;
 
+    public GameObject shipWreck;
+
     // Use this for initialization
     void Start()
     {
@@ -19,11 +21,12 @@ public class ShipScript : MonoBehaviour
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Wave")
+        if(collision.collider.tag == "Obstacle")
         {
-            rb.AddForce(transform.up * 5);
+            Instantiate(shipWreck, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);       
         }
     }
 
