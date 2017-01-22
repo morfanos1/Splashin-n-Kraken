@@ -13,8 +13,8 @@ public class ShipScript : MonoBehaviour
     public bool isBeingDestroyed;
 
     //Audio
-    public AudioSource a1;
-    public AudioSource a2;
+    public AudioSource crash1;
+    public AudioSource crash2;
 
     void Start()
     {
@@ -32,13 +32,13 @@ public class ShipScript : MonoBehaviour
         {
             //Instantiate(shipWreck, gameObject.transform.position, Quaternion.identity);
             isBeingDestroyed = true;
-            a1.Play();
-            a2.Play();
+            crash1.Play();
+            crash2.Play();
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0.0f;
             anim.SetTrigger("Crashed");
             //Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject, a2.clip.length);
+            Destroy(gameObject, crash2.clip.length);
         }      
     }
 
