@@ -50,7 +50,7 @@ public class ShipSpawner : MonoBehaviour {
 		}
 		x *= r;
 		y *= r;
-		GameObject ship = Object.Instantiate<GameObject>(this.ShipTemplate, new Vector3(x, y), Quaternion.identity);
+		GameObject ship = Object.Instantiate<GameObject>(this.ShipTemplate, new Vector3(x, y), Quaternion.AngleAxis(Mathf.Rad2Deg * this.NextShipAngle, Vector3.forward) * this.ShipTemplate.transform.localRotation);
 		ship.SetActive(true);
 
 		// Reset timer for next ship.
