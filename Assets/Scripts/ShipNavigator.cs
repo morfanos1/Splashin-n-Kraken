@@ -39,7 +39,6 @@ public class ShipNavigator : MonoBehaviour {
 		this.Target = Vector2.zero;
 		this.NextReaction = Time.time;
 		this.ShipWidth = this.GetComponent<CapsuleCollider2D>().size.x * this.transform.localScale.x;
-		Debug.LogFormat("Ship width: {0}", this.ShipWidth);
 	}
 	
 	void Update() {
@@ -71,7 +70,6 @@ public class ShipNavigator : MonoBehaviour {
 	}
 
 	void Navigate() {
-		Debug.Log("Navigating");
 		Vector2 pos = this.transform.position;
 		Vector2 targetDelta = this.Target - pos;
 		Vector2 targetDir = targetDelta.normalized;
@@ -141,7 +139,6 @@ public class ShipNavigator : MonoBehaviour {
 				}
 			}
 		}
-		Debug.LogFormat("Steer range: {0} to {1}", minSteer, maxSteer);
 		if (minSteer > 0.0f) {
 			this.TargetAngle = ClampAngle(targetAngle + minSteer);
 		} else if (maxSteer < 0.0f) {
